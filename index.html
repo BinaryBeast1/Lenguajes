@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultas Supermercado1</title>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <!-- Estilo personalizado -->
+    <style>
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background: linear-gradient(135deg, #f3f8ff, #ffffff);
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(90deg, #FF6F00, #FFA000);
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin: 0;
+        }
+
+        header p {
+            font-size: 1rem;
+            font-weight: 300;
+            margin: 5px 0 0;
+        }
+
+        main {
+            max-width: 90%;
+            margin: 30px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .query-card {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .query-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .query-card h4 {
+            color: #FF6F00;
+        }
+
+        .query-card img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+
+        button {
+            background: linear-gradient(90deg, #FF6F00, #FFA000);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background: linear-gradient(90deg, #FFA000, #FF6F00);
+            transform: translateY(-2px);
+        }
+
+        .results-container {
+            margin-top: 20px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        table th, table td {
+            padding: 15px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        table th {
+            background: #FF6F00;
+            color: white;
+        }
+
+        table td {
+            background: #f9f9f9;
+        }
+
+        footer {
+            background: #FF6F00;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: 30px;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><i class="fas fa-shopping-cart"></i> Eevee Express</h1>
+        <p>La experiencia de compra evoluciona aquí, en Eevee Express.</p>
+    </header>
+
+    <main>
+        <h2 class="text-center mb-4"><i class="fas fa-clipboard-list"></i> Consultas Predeterminadas</h2>
+        
+        <div class="query-card">
+            <h4><i class="fas fa-box"></i> Productos con bajo stock</h4>
+            <label for="sucursal-select">Selecciona la sucursal:</label>
+            <select id="sucursal-select" class="form-select my-2">
+                <option value="1">Sucursal 1</option>
+                <option value="2">Sucursal 2</option>
+                <option value="3">Sucursal 3</option>
+            </select>
+            <button onclick="executePredefinedQuery(1)">Ejecutar <i class="fas fa-play"></i></button>
+            <img src="https://via.placeholder.com/300x150" alt="Productos en stock">
+        </div>
+
+        <div class="query-card">
+            <h4><i class="fas fa-truck"></i> Órdenes de compra de un proveedor</h4>
+            <button onclick="executePredefinedQuery(2)">Ejecutar <i class="fas fa-play"></i></button>
+            <img src="https://via.placeholder.com/300x150" alt="Órdenes de compra">
+        </div>
+
+        <div class="query-card">
+            <h4><i class="fas fa-chart-line"></i> Rotación de inventario</h4>
+            <button onclick="executePredefinedQuery(3)">Ejecutar <i class="fas fa-play"></i></button>
+            <img src="https://via.placeholder.com/300x150" alt="Rotación de inventario">
+        </div>
+
+        <h3 class="text-center mt-4"><i class="fas fa-table"></i> Resultados</h3>
+        <div class="results-container">
+            <table id="results-table" class="table table-striped table-hover"></table>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Supermercado1. Todos los derechos reservados.</p>
+    </footer>
+    <script>
+        // Consultas predeterminadas
+        const predefinedQueries = {
+            1: (sucursalId) => `
+                SELECT 
+                    p.id AS producto_id,
+                    p.codigo,
+                    p.nombre,
+                    p.descripcion,
+                    i.cantidad AS stock,
+                    s.ubicacion AS sucursal
+                FROM 
+                    inventario i
+                JOIN 
+                    producto p ON i.producto_id = p.id
+                JOIN 
+                    sucursal s ON i.sucursal_id = s.id
+                WHERE 
+                    s.id = ${sucursalId} AND  
+                    i.cantidad < 20;
+            `,
+            2: `
+                SELECT 
+                    o.id AS orden_de_compra_id,
+                    o.fecha AS fecha_orden,
+                    p.nombre AS producto,
+                    d.cantidad,
+                    d.precio_unitario,
+                    pr.nombre AS proveedor,
+                    o.fecha AS fecha_compra,
+                    o.fecha + INTERVAL '30 days' AS fecha_estimacion_recepcion
+                FROM 
+                    orden_de_compra o
+                JOIN 
+                    detalle_orden_compra d ON o.id = d.orden_de_compra_id
+                JOIN 
+                    producto p ON d.producto_id = p.id
+                JOIN 
+                    proveedor pr ON o.proveedor_id = pr.id
+                WHERE 
+                    pr.id = 1;
+            `,
+            3: `
+                SELECT 
+                    v.fecha AS fecha_venta,
+                    cat.nombre AS categoria,
+                    p.nombre AS producto,
+                    s.ubicacion AS sucursal,
+                    SUM(dv.cantidad) AS total_vendido,
+                    SUM(dv.precio_unitario * dv.cantidad) AS total_ventas,
+                    i.cantidad AS stock_actual,
+                    CASE 
+                        WHEN i.cantidad > 0 THEN SUM(dv.cantidad)::DECIMAL / NULLIF(i.cantidad, 0)
+                        ELSE 0
+                    END AS rotacion_inventario
+                FROM 
+                    venta v
+                JOIN 
+                    detalle_venta dv ON v.id = dv.venta_id
+                JOIN 
+                    producto p ON dv.producto_id = p.id
+                JOIN 
+                    categoria cat ON p.categoria_id = cat.id
+                JOIN 
+                    inventario i ON p.id = i.producto_id
+                JOIN 
+                    sucursal s ON i.sucursal_id = s.id
+                GROUP BY 
+                    v.fecha, cat.nombre, p.nombre, s.ubicacion, i.cantidad
+                ORDER BY 
+                    v.fecha, cat.nombre, s.ubicacion;
+            `,
+        };
+
+        // Ejecutar consulta predeterminada
+        function executePredefinedQuery(queryId) {
+            let query;
+            if (queryId === 1) {
+                const sucursalId = document.getElementById('sucursal-select').value;
+                query = predefinedQueries[1](sucursalId);
+            } else {
+                query = predefinedQueries[queryId];
+            }
+            executeQuery(query);
+        }
+
+        // Lógica para ejecutar consultas
+        async function executeQuery(query) {
+            const resultsTable = document.getElementById('results-table');
+            resultsTable.innerHTML = ''; // Limpiar resultados previos
+
+            try {
+                const response = await fetch('http://localhost:3000/consulta', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ query }),
+                });
+
+                const data = await response.json();
+
+                if (data.error) {
+                    resultsTable.innerHTML = `<tr><td colspan="100%">Error: ${data.error}</td></tr>`;
+                } else if (data.length > 0) {
+                    // Crear encabezados
+                    const headers = Object.keys(data[0]);
+                    const headerRow = document.createElement('tr');
+                    headers.forEach(header => {
+                        const th = document.createElement('th');
+                        th.textContent = header;
+                        headerRow.appendChild(th);
+                    });
+                    resultsTable.appendChild(headerRow);
+
+                    // Crear filas
+                    data.forEach(row => {
+                        const tr = document.createElement('tr');
+                        headers.forEach(header => {
+                            const td = document.createElement('td');
+                            td.textContent = row[header] !== null ? row[header] : 'N/A';
+                            tr.appendChild(td);
+                        });
+                        resultsTable.appendChild(tr);
+                    });
+                } else {
+                    resultsTable.innerHTML = '<tr><td colspan="100%">No se encontraron resultados.</td></tr>';
+                }
+            } catch (error) {
+                resultsTable.innerHTML = `<tr><td colspan="100%">Error: ${error.message}</td></tr>`;
+            }
+        }
+    </script>
+</body>
+</html>
