@@ -15,23 +15,20 @@ const pool = new Pool({
 
 app.use(express.json());
 
-// Ruta para servir el archivo HTML
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-// Ruta para realizar consultas a la base de datos
 app.post('/consulta', async (req, res) => {
-    const { query, params } = req.body; // Consulta SQL y parámetros
+    const { query, params } = req.body;
     try {
         const result = await pool.query(query, params || []);
-        res.json(result.rows); // Devolver los resultados en formato JSON
+        res.json(result.rows); 
     } catch (error) {
-        res.status(500).json({ error: error.message }); // Enviar errores si ocurren
+        res.status(500).json({ error: error.message });
     }
 });
 
-// Iniciar el servidor
 app.listen(port, () => {
     console.log(`Servidor escuchando en http://localhost:${port}`);
 });
