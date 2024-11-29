@@ -14,18 +14,24 @@ const pool = new Pool({
 });
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
+app.use('/images', express.static(path.join(__dirname, 'public/images')));
+
+
 app.post('/consulta', async (req, res) => {
-    const { query, params } = req.body;
+    const { query, params } = req.body; 
     try {
         const result = await pool.query(query, params || []);
         res.json(result.rows); 
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        res.status(500).json({ error: error.message }); 
     }
 });
 
