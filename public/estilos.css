@@ -1,14 +1,12 @@
-/* Contenedor de las tarjetas */
 .queries-container {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 columnas de igual tamaño */
+    grid-template-columns: repeat(4, 1fr);
     gap: 20px;
-    justify-items: center; /* Centra las tarjetas en cada celda */
+    justify-items: center; 
     margin-top: 20px;
-    padding: 0 10px; /* Espacio horizontal adicional */
+    padding: 0 10px; 
 }
 
-/* Estilo para las tarjetas */
 .query-card {
     background-color: white;
     border-radius: 15px;
@@ -17,13 +15,13 @@
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
-/* Efecto hover en las tarjetas */
+
 .query-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* Imagen superior de la tarjeta */
+
 .query-card img {
     width: 100%;
     height: 150px;
@@ -31,7 +29,7 @@
     border-bottom: 2px solid #e0e0e0;
 }
 
-/* Contenido inferior de la tarjeta */
+
 .query-content {
     padding: 15px;
     text-align: center;
@@ -211,16 +209,16 @@ button:hover {
     background-color: #45a049;
 }
 
-/* Ajustes para el contenedor en dispositivos pequeños */
+
 @media screen and (max-width: 768px) {
     .queries-container {
-        grid-template-columns: repeat(2, 1fr); /* 2 columnas en pantallas pequeñas */
+        grid-template-columns: repeat(2, 1fr); 
     }
 }
 
 @media screen and (max-width: 480px) {
     .queries-container {
-        grid-template-columns: 1fr; /* 1 columna en pantallas muy pequeñas */
+        grid-template-columns: 1fr; 
     }
 }
 
