@@ -3,244 +3,595 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Consultas Supermercado1</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-    <style>
-        body {
-            font-family: 'Roboto', Arial, sans-serif;
-            background: linear-gradient(135deg, #f3f8ff, #ffffff);
-            margin: 0;
-            padding: 0;
-            color: #333;
-        }
-
-        header {
-            background: linear-gradient(90deg, #FF6F00, #FFA000);
-            color: white;
-            text-align: center;
-            padding: 20px 0;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        header h1 {
-            font-size: 2.5rem;
-            margin: 0;
-        }
-
-        header p {
-            font-size: 1rem;
-            font-weight: 300;
-            margin: 5px 0 0;
-        }
-
-        main {
-            max-width: 90%;
-            margin: 30px auto;
-            padding: 20px;
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .query-card {
-            background: #fff;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .query-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .query-card h4 {
-            color: #FF6F00;
-        }
-
-        .query-card img {
-            max-width: 100%;
-            border-radius: 10px;
-            margin-top: 10px;
-        }
-
-        button {
-            background: linear-gradient(90deg, #FF6F00, #FFA000);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: all 0.3s ease;
-        }
-
-        button:hover {
-            background: linear-gradient(90deg, #FFA000, #FF6F00);
-            transform: translateY(-2px);
-        }
-
-        .results-container {
-            margin-top: 20px;
-            overflow-x: auto;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-        }
-
-        table th, table td {
-            padding: 15px;
-            border: 1px solid #ddd;
-            text-align: left;
-        }
-
-        table th {
-            background: #FF6F00;
-            color: white;
-        }
-
-        table td {
-            background: #f9f9f9;
-        }
-
-        footer {
-            background: #FF6F00;
-            color: white;
-            text-align: center;
-            padding: 10px 0;
-            margin-top: 30px;
-        }
-
-        footer p {
-            margin: 0;
-            font-size: 0.9rem;
-        }
-    </style>
+    <link rel="stylesheet" href="estilos.css">
+    <title>Supermercados Eevee Express</title>
 </head>
 <body>
     <header>
-        <h1><i class="fas fa-shopping-cart"></i> Eevee Express</h1>
-        <p>La experiencia de compra evoluciona aquí, en Eevee Express.</p>
+        <h1>Eevee Express</h1>
+        <h4>La experiencia de compra evoluciona aquí, en Eevee Express.</h4>
     </header>
-
     <main>
-        <h2 class="text-center mb-4"><i class="fas fa-clipboard-list"></i> Consultas Predeterminadas</h2>
-        
-        <div class="query-card">
-            <h4><i class="fas fa-box"></i> Productos con bajo stock</h4>
+        <h2>Gestion de inventario</h2>
+        <div class="queries-container">
+            <div class="query-card">
+                <img src="imagenes/estanterias_supermercado.jpg" alt="stock" class="query-img">
+            <h4>Productos con bajo stock</h4>
             <label for="sucursal-select">Selecciona la sucursal:</label>
-            <select id="sucursal-select" class="form-select my-2">
+            <select id="sucursal-select">
                 <option value="1">Sucursal 1</option>
                 <option value="2">Sucursal 2</option>
                 <option value="3">Sucursal 3</option>
+                <!-- Puedes añadir más opciones de sucursales aquí -->
             </select>
-            <button onclick="executePredefinedQuery(1)">Ejecutar <i class="fas fa-play"></i></button>
-            <img src="https://via.placeholder.com/300x150" alt="Productos en stock">
+            <button onclick="executePredefinedQuery(1)">Ejecutar</button>
+        </div>
+        
+            <div class="query-card">
+                <img src="imagenes/img1.jpg" alt="Órdenes de compra" class="query-img">
+                <div class="query-content">
+                    <h4>Órdenes de compra de un proveedor específico</h4>
+                    <button onclick="executePredefinedQuery(2)">Ejecutar</button>
+                </div>
+            </div>
+        
+            <div class="query-card">
+                <img src="imagenes/img2.jpg" alt="Rotación de inventario" class="query-img">
+                <div class="query-content">
+                    <h4>Rotación de inventario por producto y sucursal</h4>
+                    <button onclick="executePredefinedQuery(3)">Ejecutar</button>
+                </div>
+            </div>
+            <div class="query-card">
+                <img src="imagenes/img3.jpg" alt="Ingresos por productos promocionados" class="query-img">
+                <div class="query-content">
+                    <h4>Ingresos por productos promocionados</h4>
+                    <button onclick="executePredefinedQuery(4)">Ejecutar</button>
+                </div>
+            </div>
+            <div class="query-card">
+                <img src="imagenes/img4.jpg" alt="Transferencias de productos entre sucursales" class="query-img">
+                <div class="query-content">
+                    <h4>Transferencias de productos entre sucursales</h4>
+                    <button onclick="executePredefinedQuery(5)">Ejecutar</button>
+                </div>
+            </div>
+            <div class="query-card">
+                <img src="imagenes/img5.jpg" alt="Rotación de inventario" class="query-img">
+                <div class="query-content">
+                    <h4>Productos perdidos por caducidad o daños</h4>
+                    <button onclick="executePredefinedQuery(6)">Ejecutar</button>
+                </div>
+            </div>
+            <div class="query-card">
+                <img src="imagenes/img6.jpg" alt="Rotación de inventario" class="query-img">
+                <div class="query-content">
+                    <h4>Reposiciones de productos en los últimos 3 meses</h4>
+                    <button onclick="executePredefinedQuery(7)">Ejecutar</button>
+                </div>
+            </div>
+            <div class="query-card">
+                <img src="imagenes/img7.jpg" alt="Rotación de inventario" class="query-img">
+                <div class="query-content">
+                    <h4>Detalles de ventas por sucursal</h4>
+                    <button onclick="executePredefinedQuery(8)">Ejecutar</button>
+                </div>
+            </div>
+            <div class="query-card">
+                <img src="imagenes/img8.jpg" alt="Rotación de inventario" class="query-img">
+                <div class="query-content">
+                    <h4>Productos sin ventas en los ultimos 30 dias</h4>
+                    <button onclick="executePredefinedQuery(9)">Ejecutar</button>
+                </div>
+            </div>
+            <div class="query-card">
+                <img src="imagenes/img9.jpg" alt="Rotación de inventario" class="query-img">
+                <div class="query-content">
+                    <h4>Productos con mas ventas en los ultimos 30 dias</h4>
+                    <button onclick="executePredefinedQuery(10)">Ejecutar</button>
+                </div>
+            </div>
+
+            <div class="query-card">
+                <img src="imagenes/img10.jpg" alt="Rotación de inventario" class="query-img">
+                <div class="query-content">
+                    <h4>Stock total de cada producto</h4>
+                    <button onclick="executePredefinedQuery(11)">Ejecutar</button>
+                </div>
+            </div>
+
+            <div class="query-card">
+                <img src="imagenes/img11.jpg" alt="Rotación de inventario"  class="query-img">
+                <div class="query-content">
+                    <h4>Ventas totales por sucursal en el último mes</h4>
+                    <button onclick="executePredefinedQuery(12)">Ejecutar</button>
+                </div>
+            </div>
+
+            <div class="query-card">
+                <img src="imagenes/img13.jpg" alt="Rotación de inventario" class="query-img">
+                <div class="query-content">
+                    <h4>Productos con fecha de vencimiento en los próximos 30 días</h4>
+                    <button onclick="executePredefinedQuery(13)">Ejecutar</button>
+                </div>
+            </div>
+            
+            <div class="query-card">
+                <img src="imagenes/img13.4.jpg" alt="Rotación de inventario" class="query-img">
+                <div class="query-content">
+                    <h4>Ventas por día en el último mes</h4>
+                    <button onclick="executePredefinedQuery(14)">Ejecutar</button>
+                </div>
+            </div>
+
+            <div class="query-card">
+                <img src="imagenes/img14.jpg" alt="Rotación de inventario" class="query-img">
+                <div class="query-content">
+                    <h4>Productos más vendidos por sucursal</h4>
+                    <button onclick="executePredefinedQuery(15)">Ejecutar</button>
+                </div>
+            </div>
+
+            <div class="query-card">
+                <img src="imagenes/img15.jpg" alt="Rotación de inventario" class="query-img">
+                <div class="query-content">
+                    <h4>Productos más caros en inventario</h4>
+                    <button onclick="executePredefinedQuery(16)">Ejecutar</button>
+                </div>
+            </div>
+
+            <div class="query-card">
+                <img src="imagenes/img16.jpg" alt="Rotación de inventario" class="query-img">
+                <div class="query-content">
+                    <h4>Número de productos vendidos en el último día</h4>
+                    <button onclick="executePredefinedQuery(17)">Ejecutar</button>
+                </div>
+            </div>
+
+            <div class="query-card">
+                <img src="imagenes/img17.jpg" alt="Rotación de inventario" class="query-img">
+                <div class="query-content">
+                    <h4>Productos sin ventas en el último mes</h4>
+                    <button onclick="executePredefinedQuery(18)">Ejecutar</button>
+                </div>
+            </div>
+
+            <div class="query-card">
+                <img src="imagenes/img18.jpg" alt="Rotación de inventario" class="query-img">
+                <div class="query-content">
+                    <h4>Total de ventas por producto en el último año</h4>
+                    <button onclick="executePredefinedQuery(19)">Ejecutar</button>
+                </div>
+            </div>
+
+            <div class="query-card">
+                <img src="imagenes/img19.jpg" alt="Rotación de inventario" class="query-img">
+                <div class="query-content">
+                    <h4>Ventas totales de las sucursales en el ultimo mes</h4>
+                    <button onclick="executePredefinedQuery(20)">Ejecutar</button>
+                </div>
+            </div>
+
+
         </div>
 
-        <div class="query-card">
-            <h4><i class="fas fa-truck"></i> Órdenes de compra de un proveedor</h4>
-            <button onclick="executePredefinedQuery(2)">Ejecutar <i class="fas fa-play"></i></button>
-            <img src="https://via.placeholder.com/300x150" alt="Órdenes de compra">
-        </div>
 
-        <div class="query-card">
-            <h4><i class="fas fa-chart-line"></i> Rotación de inventario</h4>
-            <button onclick="executePredefinedQuery(3)">Ejecutar <i class="fas fa-play"></i></button>
-            <img src="https://via.placeholder.com/300x150" alt="Rotación de inventario">
-        </div>
+        
 
-        <h3 class="text-center mt-4"><i class="fas fa-table"></i> Resultados</h3>
+
+
+
+
+        <h3>Resultados:</h3>
         <div class="results-container">
-            <table id="results-table" class="table table-striped table-hover"></table>
+            <table id="results-table"></table>
         </div>
     </main>
+    <script src="scripts.js"></script>
 
-    <footer>
-        <p>&copy; 2024 Supermercado1. Todos los derechos reservados.</p>
-    </footer>
     <script>
-       
-        const predefinedQueries = {
-            1: (sucursalId) => `
-                SELECT 
-                    p.id AS producto_id,
-                    p.codigo,
-                    p.nombre,
-                    p.descripcion,
-                    i.cantidad AS stock,
-                    s.ubicacion AS sucursal
-                FROM 
-                    inventario i
-                JOIN 
-                    producto p ON i.producto_id = p.id
-                JOIN 
-                    sucursal s ON i.sucursal_id = s.id
-                WHERE 
-                    s.id = ${sucursalId} AND  
-                    i.cantidad < 20;
-            `,
-            2: `
-                SELECT 
-                    o.id AS orden_de_compra_id,
-                    o.fecha AS fecha_orden,
-                    p.nombre AS producto,
-                    d.cantidad,
-                    d.precio_unitario,
-                    pr.nombre AS proveedor,
-                    o.fecha AS fecha_compra,
-                    o.fecha + INTERVAL '30 days' AS fecha_estimacion_recepcion
-                FROM 
-                    orden_de_compra o
-                JOIN 
-                    detalle_orden_compra d ON o.id = d.orden_de_compra_id
-                JOIN 
-                    producto p ON d.producto_id = p.id
-                JOIN 
-                    proveedor pr ON o.proveedor_id = pr.id
-                WHERE 
-                    pr.id = 1;
-            `,
-            3: `
-                SELECT 
-                    v.fecha AS fecha_venta,
-                    cat.nombre AS categoria,
-                    p.nombre AS producto,
-                    s.ubicacion AS sucursal,
-                    SUM(dv.cantidad) AS total_vendido,
-                    SUM(dv.precio_unitario * dv.cantidad) AS total_ventas,
-                    i.cantidad AS stock_actual,
-                    CASE 
-                        WHEN i.cantidad > 0 THEN SUM(dv.cantidad)::DECIMAL / NULLIF(i.cantidad, 0)
-                        ELSE 0
-                    END AS rotacion_inventario
-                FROM 
-                    venta v
-                JOIN 
-                    detalle_venta dv ON v.id = dv.venta_id
-                JOIN 
-                    producto p ON dv.producto_id = p.id
-                JOIN 
-                    categoria cat ON p.categoria_id = cat.id
-                JOIN 
-                    inventario i ON p.id = i.producto_id
-                JOIN 
-                    sucursal s ON i.sucursal_id = s.id
-                GROUP BY 
-                    v.fecha, cat.nombre, p.nombre, s.ubicacion, i.cantidad
-                ORDER BY 
-                    v.fecha, cat.nombre, s.ubicacion;
-            `,
-        };
+        
+const predefinedQueries = {
+    1: (sucursalId) => `
+        SELECT 
+            p.id AS producto_id,
+            p.codigo,
+            p.nombre,
+            p.descripcion,
+            i.cantidad AS stock,
+            s.ubicacion AS sucursal
+        FROM 
+            inventario i
+        JOIN 
+            producto p ON i.producto_id = p.id
+        JOIN 
+            sucursal s ON i.sucursal_id = s.id
+        WHERE 
+            s.id = ${sucursalId} AND  
+            i.cantidad < 20;
+    `,
+    2: `
+        SELECT 
+            o.id AS orden_de_compra_id,
+            o.fecha AS fecha_orden,
+            p.nombre AS producto,
+            d.cantidad,
+            d.precio_unitario,
+            pr.nombre AS proveedor,
+            o.fecha AS fecha_compra,
+            o.fecha + INTERVAL '30 days' AS fecha_estimacion_recepcion
+        FROM 
+            orden_de_compra o
+        JOIN 
+            detalle_orden_compra d ON o.id = d.orden_de_compra_id
+        JOIN 
+            producto p ON d.producto_id = p.id
+        JOIN 
+            proveedor pr ON o.proveedor_id = pr.id
+        WHERE 
+            pr.id = 1;
+    `,
+    3: `
+        SELECT 
+            v.fecha AS fecha_venta,
+            cat.nombre AS categoria,
+            p.nombre AS producto,
+            s.ubicacion AS sucursal,
+            SUM(dv.cantidad) AS total_vendido,
+            SUM(dv.precio_unitario * dv.cantidad) AS total_ventas,
+            i.cantidad AS stock_actual,
+            CASE 
+                WHEN i.cantidad > 0 THEN SUM(dv.cantidad)::DECIMAL / NULLIF(i.cantidad, 0)
+                ELSE 0
+            END AS rotacion_inventario
+        FROM 
+            venta v
+        JOIN 
+            detalle_venta dv ON v.id = dv.venta_id
+        JOIN 
+            producto p ON dv.producto_id = p.id
+        JOIN 
+            categoria cat ON p.categoria_id = cat.id
+        JOIN 
+            inventario i ON p.id = i.producto_id
+        JOIN 
+            sucursal s ON i.sucursal_id = s.id
+        GROUP BY 
+            v.fecha, cat.nombre, p.nombre, s.ubicacion, i.cantidad
+        ORDER BY 
+            v.fecha, cat.nombre, s.ubicacion;
+    `,
+    4: `
+        SELECT 
+            p.nombre AS producto,
+            SUM(dv.cantidad) AS cantidad_vendida,
+            SUM(dv.cantidad * dv.precio_unitario) AS total_ingresos,
+            pr.descripcion AS promocion,
+            pr.fecha_inicio,
+            pr.fecha_fin
+        FROM 
+            promocion pr
+        JOIN 
+            promocion_producto pp ON pr.id = pp.promocion_id
+        JOIN 
+            producto p ON pp.producto_id = p.id
+        JOIN 
+            detalle_venta dv ON p.id = dv.producto_id
+        JOIN 
+            venta v ON dv.venta_id = v.id
+        WHERE 
+            v.fecha BETWEEN pr.fecha_inicio AND pr.fecha_fin
+        GROUP BY 
+            p.nombre, pr.descripcion, pr.fecha_inicio, pr.fecha_fin
+        ORDER BY 
+            cantidad_vendida DESC;
+    `,
+    5: `
+        SELECT 
+    tp.id AS transferencia_id,
+    p.nombre AS producto,
+    sucursal_origen.ubicacion AS sucursal_origen,
+    sucursal_destino.ubicacion AS sucursal_destino,
+    tp.cantidad AS cantidad_transferida,
+    tp.fecha AS fecha_transferencia,
+    COALESCE(inv_origen.cantidad, 0) AS inventario_origen_antes,
+    COALESCE(inv_origen.cantidad, 0) - tp.cantidad AS inventario_origen_despues,
+    COALESCE(inv_destino.cantidad, 0) AS inventario_destino_antes,
+    COALESCE(inv_destino.cantidad, 0) + tp.cantidad AS inventario_destino_despues
+FROM 
+    transferencia_producto tp
+JOIN 
+    producto p ON tp.producto_id = p.id
+JOIN 
+    sucursal sucursal_origen ON tp.sucursal_origen_id = sucursal_origen.id
+JOIN 
+    sucursal sucursal_destino ON tp.sucursal_destino_id = sucursal_destino.id
+LEFT JOIN 
+    inventario inv_origen ON tp.producto_id = inv_origen.producto_id 
+    AND tp.sucursal_origen_id = inv_origen.sucursal_id
+LEFT JOIN 
+    inventario inv_destino ON tp.producto_id = inv_destino.producto_id 
+    AND tp.sucursal_destino_id = inv_destino.sucursal_id
+ORDER BY 
+    tp.fecha DESC;
+    `,
+    6: `
+        WITH productos_caducados AS (
+            SELECT 
+                i.id AS inventario_id,
+                p.nombre AS producto,
+                s.ubicacion AS sucursal,
+                i.cantidad AS cantidad_en_inventario,
+                p.fecha_vencimiento AS fecha_vencimiento,
+                'Caducidad' AS tipo_perdida
+            FROM 
+                inventario i
+                JOIN producto p ON i.producto_id = p.id
+                JOIN sucursal s ON i.sucursal_id = s.id
+            WHERE 
+                p.fecha_vencimiento < CURRENT_DATE
+        ),
+        productos_con_daños AS (
+            SELECT 
+                i.id AS inventario_id,
+                p.nombre AS producto,
+                s.ubicacion AS sucursal,
+                i.cantidad AS cantidad_en_inventario,
+                NULL::DATE AS fecha_vencimiento,
+                'Daños' AS tipo_perdida
+            FROM 
+                inventario i
+                JOIN producto p ON i.producto_id = p.id
+                JOIN sucursal s ON i.sucursal_id = s.id
+            WHERE 
+                i.cantidad < 5
+        )
+        SELECT 
+            inventario_id,
+            producto,
+            sucursal,
+            cantidad_en_inventario,
+            fecha_vencimiento,
+            tipo_perdida
+        FROM 
+            productos_caducados
+        UNION ALL
+        SELECT 
+            inventario_id,
+            producto,
+            sucursal,
+            cantidad_en_inventario,
+            fecha_vencimiento,
+            tipo_perdida
+        FROM 
+            productos_con_daños
+        ORDER BY 
+            tipo_perdida, sucursal;
+    `,
+    7: `
+        SELECT 
+            p.nombre AS producto,
+            COUNT(doc.id) AS cantidad_reposiciones,
+            o.fecha AS fecha_reposicion,
+            s.ubicacion AS sucursal,
+            pr.nombre AS proveedor
+        FROM 
+            detalle_orden_compra doc
+        JOIN 
+            orden_de_compra o ON doc.orden_de_compra_id = o.id
+        JOIN 
+            producto p ON doc.producto_id = p.id
+        JOIN 
+            sucursal s ON o.sucursal_id_fk = s.id
+        JOIN 
+            proveedor pr ON o.proveedor_id = pr.id
+        WHERE 
+            o.fecha >= CURRENT_DATE - INTERVAL '3 months'
+        GROUP BY 
+            p.nombre, o.fecha, s.ubicacion, pr.nombre
+        ORDER BY 
+            cantidad_reposiciones DESC;
+    `,
+    8: `
+        SELECT 
+            s.ubicacion AS sucursal,
+            p.nombre AS producto,
+            dv.cantidad,
+            dv.precio_unitario
+        FROM 
+            venta v
+        JOIN 
+            detalle_venta dv ON v.id = dv.venta_id
+        JOIN 
+            producto p ON dv.producto_id = p.id
+        JOIN 
+            sucursal s ON v.sucursal_id = s.id
+        ORDER BY 
+            s.ubicacion;
+    `,
+    9: `
+        SELECT 
+        p.nombre AS producto,
+        p.descripcion AS descripcion
+    FROM 
+        producto p
+    LEFT JOIN 
+        detalle_venta dv ON p.id = dv.producto_id
+    LEFT JOIN 
+        venta v ON dv.venta_id = v.id
+    WHERE 
+        v.fecha < CURRENT_DATE - INTERVAL '30 days' OR v.fecha IS NULL;
 
-       
+    `,
+    10: `
+    SELECT 
+    p.nombre,
+    SUM(dv.cantidad) AS cantidad_vendida,
+    SUM(dv.cantidad * dv.precio_unitario) AS total_ingresos
+FROM 
+    detalle_venta dv
+JOIN 
+    venta v ON dv.venta_id = v.id
+JOIN 
+    producto p ON dv.producto_id = p.id
+WHERE 
+    v.fecha >= CURRENT_DATE - INTERVAL '1 month'
+GROUP BY 
+    p.nombre
+ORDER BY 
+    cantidad_vendida DESC;
+
+    `,
+    11: `
+    SELECT 
+    p.nombre,
+    SUM(i.cantidad) AS stock_total
+FROM 
+    inventario i
+JOIN 
+    producto p ON i.producto_id = p.id
+GROUP BY 
+    p.nombre
+ORDER BY 
+    stock_total DESC;
+
+    `,
+    12: `
+    
+    SELECT 
+    s.ubicacion AS sucursal,
+    SUM(dv.cantidad * dv.precio_unitario) AS total_ventas
+FROM 
+    venta v
+JOIN 
+    detalle_venta dv ON v.id = dv.venta_id
+JOIN 
+    sucursal s ON v.sucursal_id = s.id
+WHERE 
+    v.fecha >= CURRENT_DATE - INTERVAL '1 month'
+GROUP BY 
+    s.ubicacion
+ORDER BY 
+    total_ventas DESC;
+
+    `,
+    13: `
+    SELECT 
+    p.nombre,
+    p.fecha_vencimiento
+FROM 
+    producto p
+WHERE 
+    p.fecha_vencimiento BETWEEN CURRENT_DATE AND CURRENT_DATE + INTERVAL '30 days'
+ORDER BY 
+    p.fecha_vencimiento;
+
+    `,
+    14: `
+    SELECT 
+    DATE(v.fecha) AS fecha,
+    SUM(dv.cantidad * dv.precio_unitario) AS total_ventas
+FROM 
+    venta v
+JOIN 
+    detalle_venta dv ON v.id = dv.venta_id
+WHERE 
+    v.fecha >= CURRENT_DATE - INTERVAL '1 month'
+GROUP BY 
+    fecha
+ORDER BY 
+    fecha;
+    `,
+    15: `
+    SELECT 
+    s.ubicacion AS sucursal,
+    p.nombre AS producto,
+    SUM(dv.cantidad) AS cantidad_vendida
+FROM 
+    venta v
+JOIN 
+    detalle_venta dv ON v.id = dv.venta_id
+JOIN 
+    producto p ON dv.producto_id = p.id
+JOIN 
+    sucursal s ON v.sucursal_id = s.id
+GROUP BY 
+    s.ubicacion, p.nombre
+ORDER BY 
+    cantidad_vendida DESC;
+
+    `,
+    16: `
+    SELECT 
+    p.nombre,
+    p.precio_venta
+FROM 
+    producto p
+ORDER BY 
+    p.precio_venta DESC
+LIMIT 5;
+
+    `,
+    17: `
+    SELECT 
+    COUNT(dv.id) AS total_productos_vendidos
+FROM 
+    detalle_venta dv
+JOIN 
+    venta v ON dv.venta_id = v.id
+WHERE 
+    v.fecha = CURRENT_DATE;
+
+    `,
+    18: `
+    SELECT 
+    p.nombre
+FROM 
+    producto p
+LEFT JOIN 
+    detalle_venta dv ON p.id = dv.producto_id
+LEFT JOIN 
+    venta v ON dv.venta_id = v.id
+WHERE 
+    v.fecha IS NULL OR v.fecha < CURRENT_DATE - INTERVAL '1 month';
+
+    `,
+    19: `
+    SELECT 
+    p.nombre,
+    SUM(dv.cantidad * dv.precio_unitario) AS total_ventas
+FROM 
+    detalle_venta dv
+JOIN 
+    venta v ON dv.venta_id = v.id
+JOIN 
+    producto p ON dv.producto_id = p.id
+WHERE 
+    v.fecha >= CURRENT_DATE - INTERVAL '1 year'
+GROUP BY 
+    p.nombre
+ORDER BY 
+    total_ventas DESC;
+
+    `,
+    20: `
+    SELECT 
+    sucursal_id, 
+    SUM(total) AS ventas_totales
+FROM 
+    venta v
+WHERE 
+    v.fecha >= date_trunc('month', CURRENT_DATE) - INTERVAL '1 month'
+    AND v.fecha < date_trunc('month', CURRENT_DATE)
+GROUP BY 
+    sucursal_id
+ORDER BY 
+    ventas_totales DESC;
+    `
+};
+
+
+        
         function executePredefinedQuery(queryId) {
             let query;
             if (queryId === 1) {
@@ -255,7 +606,7 @@
        
         async function executeQuery(query) {
             const resultsTable = document.getElementById('results-table');
-            resultsTable.innerHTML = ''; 
+            resultsTable.innerHTML = '';
 
             try {
                 const response = await fetch('http://localhost:3000/consulta', {
@@ -271,7 +622,7 @@
                 if (data.error) {
                     resultsTable.innerHTML = `<tr><td colspan="100%">Error: ${data.error}</td></tr>`;
                 } else if (data.length > 0) {
-                    
+                   
                     const headers = Object.keys(data[0]);
                     const headerRow = document.createElement('tr');
                     headers.forEach(header => {
@@ -298,6 +649,7 @@
                 resultsTable.innerHTML = `<tr><td colspan="100%">Error: ${error.message}</td></tr>`;
             }
         }
+
     </script>
 </body>
 </html>
